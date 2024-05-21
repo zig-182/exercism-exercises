@@ -74,14 +74,17 @@ def value_of_ace(card_one, card_two):
     2.  'A' (ace card) = 11 (if already in hand)
     3.  '2' - '10' = numerical value.
     """
-                 
-    if value_of_card(card_one) + value_of_card(card_two) >= 11:
+        
+    card_one_value = value_of_card(card_one)
+    card_two_value = value_of_card(card_two)
+
+    if card_one == 'A' or card_two == 'A':
         return 1
-    elif value_of_card(card_one) + value_of_card(card_two) <= 10:
+    if card_one_value + card_two_value <= 10:
         return 11
-    elif card_two == 'A' or card_one == 'A':
+    else:
         return 1
-    #in this one, I don't think i've done anything about drawing an Ace
+
     
    
 def is_blackjack(card_one, card_two):
@@ -94,18 +97,10 @@ def is_blackjack(card_one, card_two):
     2.  'A' (ace card) = 11 (if already in hand)
     3.  '2' - '10' = numerical value.
     """
-    
-    if value_of_card(card_one) + value_of_card(card_two) == 21:
+    if card_one == 'A' and value_of_card(card_two) == 10 or card_two == 'A' and value_of_card(card_one) == 10:
         return True
     else:
         return False
-    
-    #if value_of_card(card_one) == 'A' and value_of_card(card_two) == 10:
-    #    return True
-    #elif value_of_card(card_two) == 'A' and value_of_card(card_one) == 10:
-    #    return True
-    #else:
-    #    return False
 
 
 
@@ -116,16 +111,12 @@ def can_split_pairs(card_one, card_two):
     :return: bool - can the hand be split into two pairs? (i.e. cards are of the same value).
     """
 
-    #value_of_card()
-    if card_one == card_two:
+    if value_of_card(card_one) == value_of_card(card_two):
         return True
     else:
         return False
     
-    #This is not correct - need to find a way to make J == Q e.g.
     
-
-
 
 def can_double_down(card_one, card_two):
     """Determine if a blackjack player can place a double down bet.
@@ -133,10 +124,10 @@ def can_double_down(card_one, card_two):
     :param card_one, card_two: str - first and second cards in hand.
     :return: bool - can the hand can be doubled down? (i.e. totals 9, 10 or 11 points).
     """
-    #value_of_card()
+       
+    total_value = value_of_card(card_one) + value_of_card(card_two)
+    return 9 <= total_value <= 11
     
-    if card_one + card_two == '9' or '10' or '11':
-        return True
-    else:
-        return False
+    
+    
     
